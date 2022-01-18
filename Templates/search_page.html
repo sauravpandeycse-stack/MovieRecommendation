@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static %}
+{% load my_app_tag %}
+
+<html>
+	<head>
+		<title>MyRecommendation</title>
+		<link rel="stylesheet" href="{%static 'content_model/my_style.css' %}">
+	</head>
+	<body>
+		<div id="search_form">
+			{%get_date as today%}
+			<form class="example" action="recommend" method="POST">
+				{% csrf_token %}
+				<input type="text" placeholder="Search.." name="search" required>
+				<button type="submit">Search</i></button>
+				{{today}}
+				{% if movie_data %}
+				<div id="movies" style="  background-image: linear-gradient(to bottom right, red, yellow);
+				">
+				{% for i in movie_data%}
+				<div id="movie_design" style="background-color: #87deb3; width:100%; margin-top: 10%; text-align: center; padding-top: 5%;padding-bottom: 5%;">
+				<h2 id="m"><a href="next?m_title={{i}}"><i>{{i}}</a></i></h2>
+
+				</div>
+				{% endfor %}
+				{% else %}
+				<h3 style="color: red;">Please search movie !</h2>
+				{% endif %}
+			    </div>
+			</form>
+		</div>
+	</body>
+</html>
